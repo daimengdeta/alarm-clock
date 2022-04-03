@@ -15,6 +15,7 @@
 <script>
 export default {
   props: ['name', 'age', 'aihao', 'count'],
+  //props,接收属性
   data() {
     return {
     }

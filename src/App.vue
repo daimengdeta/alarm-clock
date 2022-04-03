@@ -13,13 +13,13 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import 父子传值 from './test/父子传值/index.vue'
 import 列表练习 from './test/列表练习/index.vue'
-import 练习模板页面2 from './test/练习模板页面2/index.vue'
+import 子传父练习 from './test/子传父练习/index.vue'
 
 export default {
-  components: {父子传值, 列表练习, 练习模板页面2},
+  components: {父子传值, 列表练习, 子传父练习},
   data() {
     return {
-      comps: ['父子传值', '列表练习', '练习模板页面2'],
+      comps: ['父子传值', '列表练习', '子传父练习'],
       curComp: ''
     }
   },

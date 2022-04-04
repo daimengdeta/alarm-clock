@@ -22,6 +22,7 @@ export default {
   },
   methods:{
     add(){
+      console.log(this.$parent, '===========打印的 ------ add');
       this.$emit('add', 2)
     }
   },

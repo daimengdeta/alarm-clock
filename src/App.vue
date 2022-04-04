@@ -13,12 +13,13 @@
 import 父子传值 from './test/父子传值/index.vue';
 import 列表练习 from './test/列表练习/index.vue';
 import 子传父练习 from './test/子传父练习/index.vue';
+import 列表点击变红 from './test/列表点击变红/index.vue';
 
 export default {
-  components: { 父子传值, 列表练习, 子传父练习 },
+  components: { 父子传值, 列表练习, 子传父练习, 列表点击变红 },
   data() {
     return {
-      comps: ['父子传值', '列表练习', '子传父练习'],
+      comps: ['父子传值', '列表练习', '子传父练习', '列表点击变红'],
       curComp: '',
     };
   },

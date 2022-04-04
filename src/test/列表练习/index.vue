@@ -1,7 +1,7 @@
 <template>
   <link href="https://cdn.bootcdn.net/ajax/libs/mvp.css/1.8.0/mvp.min.css" rel="stylesheet" />
   <h1>列表练习</h1>
-  <table>
+  <table v-if="list.length">
     <thead>
       <tr>
         <th></th>
@@ -28,6 +28,7 @@
     </tbody>
     <div>汇总：￥{{ money() }}</div>
   </table>
+  <div v-else>购物车为空</div>
 </template>
 
 <script>

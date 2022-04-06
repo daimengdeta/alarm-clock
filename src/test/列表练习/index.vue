@@ -1,5 +1,4 @@
 <template>
-  <link href="https://cdn.bootcdn.net/ajax/libs/mvp.css/1.8.0/mvp.min.css" rel="stylesheet" />
   <h1>列表练习</h1>
   <table v-if="list.length">
     <thead>

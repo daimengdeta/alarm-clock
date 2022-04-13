@@ -1,4 +1,9 @@
 <template>
+  <div class="">
+    {{ name }}
+  </div>
+  <cpn ref="cpn" />
+  <button @click="butclick">按钮</button>
   <el-button>123</el-button>
   <div class="header">
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
@@ -28,9 +33,12 @@
 
 <script>
 import Child from './components/child.vue';
+import cpn from './components/cpn.vue';
 export default {
+  name: '父访问子',
   components: {
     Child,
+    cpn,
   },
   data() {
     return {
@@ -60,11 +68,18 @@ export default {
         user: '',
         region: '',
       },
+      name: 'test',
     };
   },
   methods: {
     onSubmit() {
       console.log('submit!');
+    },
+    test() {
+      console.log('执行test方法');
+    },
+    butclick() {
+      this.$refs.cpn.showMessage();
     },
   },
 };

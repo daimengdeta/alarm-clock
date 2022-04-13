@@ -15,12 +15,14 @@ import 列表练习 from './test/列表练习/index.vue';
 import 子传父练习 from './test/子传父练习/index.vue';
 import 列表点击变红 from './test/列表点击变红/index.vue';
 import 父传子结合双向绑定 from './test/父传子结合双向绑定/index.vue';
+import 父访问子 from './test/父访问子/index.vue';
+import 工单 from './test/工单/index.vue';
 
 export default {
-  components: { 父子传值, 列表练习, 子传父练习, 列表点击变红, 父传子结合双向绑定 },
+  components: { 父子传值, 列表练习, 子传父练习, 列表点击变红, 父传子结合双向绑定, 父访问子, 工单 },
   data() {
     return {
-      comps: ['父子传值', '列表练习', '子传父练习', '列表点击变红', '父传子结合双向绑定'],
+      comps: ['父子传值', '列表练习', '子传父练习', '列表点击变红', '父传子结合双向绑定', '父访问子', '工单'],
       curComp: '',
     };
   },

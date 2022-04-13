@@ -4,29 +4,32 @@
     <h2>{{ name }}</h2>
     <h2>年龄：{{ age }}</h2>
     <div class="">
-      <div class="" v-for="item in aihao">{{item}}</div>
+      <div class="" v-for="item in aihao">{{ item }}</div>
     </div>
- <div class=""> 来自父组件的count:  {{count}}</div>
+    <div class="">来自父组件的count: {{ count }}</div>
     <button @click="add">+</button>
 
+    <comp1 /> <comp2 name="9999" />
   </div>
 </template>
 
 <script>
+import comp1 from './comp1.vue';
+import comp2 from './comp2.vue';
 export default {
+  components: { comp1, comp2 },
   props: ['name', 'age', 'aihao', 'count'],
   //props,接收属性
   data() {
-    return {
-    }
+    return {};
   },
-  methods:{
-    add(){
+  methods: {
+    add() {
       console.log(this.$parent, '===========打印的 ------ add');
-      this.$emit('add', 2)
-    }
+      this.$emit('add', 2);
+    },
   },
-}
+};
 </script>
 
 <style lang="less">
@@ -34,6 +37,5 @@ export default {
   color: #42b983;
   border: 2px solid #42b983;
   margin: 20px;
-
 }
 </style>

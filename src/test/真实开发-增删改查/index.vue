@@ -11,7 +11,7 @@
         </el-form-item>
         <el-form-item>
           <!--          搜索：先把要搜索的数据传给后台，后台反馈回来，把后台数据赋值给表格数据-->
-          <el-button type="primary" @click="onSubmit">搜索</el-button>
+          <el-button type="primary" @click="getData">搜索</el-button>
         </el-form-item>
         <el-form-item>
           <!--      ref=form设置在表单开头el-form，方法内：this.$refs.form.resetFields(),要重置的加prop-->
@@ -37,12 +37,28 @@
         <!--slot插槽，用#代替了并给了参数row，这里都用row来写        -->
         <template #default="{ row }">
           <el-button type="text" @click="edit(row)">编辑</el-button>
-          <el-button size="small" type="danger" @click="remove(row)">移除</el-button>
+          <el-popconfirm
+            title="确定删除吗?"
+            confirm-button-text="确定"
+            cancel-button-text="取消"
+            @confirm="remove(row)"
+          >
+            <template #reference>
+              <el-button size="small" type="danger">移除</el-button>
+            </template>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      v-model:currentPage="currentPage"
+      :page-size="10"
+      layout="total, prev, pager, next"
+      :total="total"
+      @current-change="getData"
+    />
     <el-dialog title="信息编辑" v-model="dialogFormVisible">
-      <el-form :model="form" class="form">
+      <el-form ref="dialogForm" :model="form" class="form">
         <el-form-item label="姓名">
           <el-input v-model="form.name" autocomplete="off"></el-input>
         </el-form-item>
@@ -67,48 +83,35 @@
 
 <script>
 import axios from 'axios'; // 教学视频: https://www.bilibili.com/video/BV15741177Eh?p=143
-
+import { ElMessage } from 'element-plus';
 export default {
   name: '增删改查',
   components: {},
   data() {
     return {
       tableData: [],
-      // id: '',
-      // sex: '',
-      // name: '',
-      // age: '',
-      // born: '',
       formInline: {
-        // user: '',
-        // region: '',
         age: '',
         name: '',
-        id: '',
-        sex: '',
-        born: '',
       },
       dialogFormVisible: false,
       form: {
         name: '',
-        // region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: '',
         birth: '',
-        time: '',
+        age: '',
         remarks: '',
       },
-      formLabelWidth: '120px',
+      currentPage: 1,
+      total: 0,
+
       loading: false,
       active: null,
+      type: 'add', // edit
     };
   },
   methods: {
     edit(row) {
+      this.type = 'edit';
       console.log(row, '===========打印的 ------ edit');
       this.dialogFormVisible = true;
       this.form.id = row.id;
@@ -123,13 +126,6 @@ export default {
       }
       return '男';
     },
-    onSubmit() {
-      console.log('submit!');
-      this.getData();
-    },
-    test() {
-      console.log('执行test方法');
-    },
     resetForm() {
       this.$refs.form.resetFields();
     },
@@ -143,43 +139,38 @@ export default {
         .then((res) => {
           this.getData();
         });
-      // this.formInline.splice(this.id, 1);
     },
     getData() {
       this.loading = true;
       axios
-        .post('http://localhost:5000/users/list', {
+        .post('http://localhost:5000/users/page', {
           name: this.formInline.name,
           age: this.formInline.age,
+          pageNum: this.currentPage,
+          pageSize: 10,
         })
         .then((res) => {
           console.log('===========打印的res对象 ------ ', res);
-          console.log('===========打印的res.data对象 ------ ', res.data.data[0]);
           // todo 如何才能从res里面取到正确的属性，把需要的数组数据显示在表格上
-          const res1 = res.data.data;
           //tableData是数组，要求res1也是数组
-          this.tableData = res1;
+          const data = res.data.data;
+          this.tableData = data.rows;
+          this.total = data.total;
+        })
+        .finally(() => {
           this.loading = false;
-
-          console.log(res1, '===========打印的 ------ 112');
-          console.log(this.tableData.name, '===========打印的 ------ 3');
         });
     },
     add() {
-      axios.post('http://localhost:5000/users/add', { name: 'xjz', age: '12' }).then((res) => {
-        this.getData();
-      });
-      // .then(function (res) {
-      //   this.getData();
-      // });
+      this.type = 'add';
+      this.form = {};
+      this.dialogFormVisible = true;
     },
     submit() {
       //最初
       this.dialogFormVisible = false;
-      console.log(this.form.id, '===========打印的 ------ 1');
-
       axios
-        .post('http://localhost:5000/users/edit', {
+        .post('http://localhost:5000/users/' + this.type, {
           //发送的
           id: this.form.id,
           name: this.form.name,
@@ -188,8 +179,21 @@ export default {
         })
         //发送成功，然后做什么，没有成功，不会做下面的方法
         .then((res) => {
-          this.getData();
-          this.dialogFormVisible = false;
+          console.log(res, '===========打印的 ------ ');
+          const success = res.data.success;
+          if (success) {
+            ElMessage({
+              message: '提交成功',
+              type: 'success',
+            });
+            this.getData();
+            this.dialogFormVisible = false;
+          } else {
+            ElMessage({
+              message: res.data.msg,
+              type: 'error',
+            });
+          }
         });
     },
   },

@@ -17,12 +17,22 @@ import 列表点击变红 from './test/列表点击变红/index.vue';
 import 父传子结合双向绑定 from './test/父传子结合双向绑定/index.vue';
 import 父访问子 from './test/父访问子/index.vue';
 import 工单 from './test/工单/index.vue';
+import 增删改查 from './test/真实开发-增删改查/index.vue';
 
 export default {
-  components: { 父子传值, 列表练习, 子传父练习, 列表点击变红, 父传子结合双向绑定, 父访问子, 工单 },
+  components: { 父子传值, 列表练习, 子传父练习, 列表点击变红, 父传子结合双向绑定, 父访问子, 工单, 增删改查 },
   data() {
     return {
-      comps: ['父子传值', '列表练习', '子传父练习', '列表点击变红', '父传子结合双向绑定', '父访问子', '工单'],
+      comps: [
+        '父子传值',
+        '列表练习',
+        '子传父练习',
+        '列表点击变红',
+        '父传子结合双向绑定',
+        '父访问子',
+        '工单',
+        '增删改查',
+      ],
       curComp: '',
     };
   },

@@ -24,7 +24,7 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button ref="button" type="primary" @click="onSubmit">搜索</el-button>
+        <el-button type="primary" @click="onSubmit">搜索</el-button>
       </el-form-item>
       <el-form-item>
         <el-button @click="resetForm()">重置</el-button>
@@ -85,7 +85,7 @@ const getDataByApi = (data) => {
 export default {
   data() {
     return {
-      tableData: [{}],
+      tableData: [],
       formInline: {
         order: '',
         name: '',

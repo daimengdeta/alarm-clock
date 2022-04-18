@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "start": "nodemon ./backend/bin/www",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -19,6 +20,14 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.0",
-    "vite": "^2.9.0"
+    "vite": "^2.9.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.15",
+    "pug": "2.0.0-beta11",
+    "uuid4": "^2.0.2"
   }
 }

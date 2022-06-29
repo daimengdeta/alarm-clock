@@ -4,25 +4,24 @@
       {{ item }}
     </div>
   </div>
-  <component :is="curComp" />
+  <!--  <router-link>-->
+  <!--  <router-view></router-view> 根据当前的路径，动态渲染出不同的组件-->
+  <!--  <component :is="curComp" />-->
+  <router-view />
 </template>
 
 <script>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import 父子传值 from './test/父子传值/index.vue';
-import 列表练习 from './test/列表练习/index.vue';
-import 子传父练习 from './test/子传父练习/index.vue';
-import 列表点击变红 from './test/列表点击变红/index.vue';
-import 父传子结合双向绑定 from './test/父传子结合双向绑定/index.vue';
-import 父访问子 from './test/父访问子/index.vue';
-import 工单 from './test/工单/index.vue';
-import 增删改查 from './test/真实开发-增删改查/index.vue';
+////配置路由相关信息，导入**
 
+//3.export 传出
 export default {
-  components: { 父子传值, 列表练习, 子传父练习, 列表点击变红, 父传子结合双向绑定, 父访问子, 工单, 增删改查 },
+  //2.创建对象
+  components: {},
   data() {
     return {
+      //   //配置路由和组件直接的应用关系
       comps: [
         '父子传值',
         '列表练习',
@@ -32,6 +31,10 @@ export default {
         '父访问子',
         '工单',
         '增删改查',
+        '增删改查练习',
+        'Axios',
+        'el,plus转换成vue',
+        // 'JS练习',
       ],
       curComp: '',
     };
@@ -39,7 +42,7 @@ export default {
   methods: {
     navTo(item) {
       this.curComp = item;
-      location.hash = '/' + item;
+      this.$router.push(encodeURIComponent(item));
       console.log(location);
     },
     isActive(item) {

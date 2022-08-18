@@ -41,15 +41,17 @@
 
   <el-table v-loading="loading" :data="tableData">
     <!--      表格-->
+    <el-table-column prop="uuid" label="ID" width="240" />
     <el-table-column prop="hours" label="小时" width="180" />
     <el-table-column prop="Minutes" label="分钟" width="180" />
     <el-table-column prop="todayStop" label="今日已停止" width="180" />
+    <el-table-column prop="status" label="当前状态" width="180" />
     <el-table-column prop="action" label="操作">
       <!--slot插槽，用#代替了并给了参数row，这里都用row来写        -->
-      <template #default="{ row, index }">
-        <el-button type="text" @click="stop(row)">停止</el-button>
-        <el-button type="text" @click="starts(row)" v-bind="start">启动</el-button>
-        <el-button type="text" @click="edit(row, index)">修改</el-button>
+      <template #default="{ row, $index }">
+        <el-button type="text" @click="toggle(row, $index)">{{ row.status === '停止' ? '启动' : '停止' }}</el-button>
+        <!--        <el-button type="text" @click="starts(row, $index)">启动</el-button>-->
+        <el-button type="text" @click="edit(row, $index)">修改</el-button>
         <el-popconfirm title="确定删除吗?" confirm-button-text="确定" cancel-button-text="取消" @confirm="remove(row)">
           <template #reference>
             <el-button size="small" type="danger">移除</el-button>
@@ -63,6 +65,7 @@
 <script>
 import Child from './components/child.vue';
 import { ElMessage } from 'element-plus';
+import { nanoid } from 'nanoid';
 //1.建立个tabel,将数据移入进去，
 //移动进去的办法是，获取存入的数据，把对象的value取出来，编辑好并赋值给表格数据
 
@@ -88,6 +91,8 @@ export default {
       audioInstance: null,
       playing: false,
       time: [],
+      setTime: null,
+      timers: [], // 定时器数组
     };
   },
   methods: {
@@ -100,7 +105,7 @@ export default {
       } else if (this.form.Minutes < 0 || this.form.Minutes > 59) {
         ElMessage.error('请填写正确的时间');
       } else {
-        this.tableData.push({ hours: this.form.hours, Minutes: this.form.Minutes, todayStop: false });
+        this.tableData.push({ uuid: nanoid(), hours: this.form.hours, Minutes: this.form.Minutes, todayStop: false });
         console.log(this.tableData, '===========打印的 ------ add.this.tableData');
         localStorage.setItem('时间', JSON.stringify(this.tableData));
         ElMessage.success('保存成功');
@@ -138,41 +143,45 @@ export default {
         this.audioInstance.pause();
       }
     },
-
-    //计时器
-    timer() {
-      const audio = (this.audioInstance = new Audio());
-      audio.src = 'https://music.163.com/song/media/outer/url?id=167827.mp3';
-      const setTime = setInterval(() => {
+    // 抽离处理，这样就可以初始化的时候和当个启动时进行复用
+    startTimer(config, index) {
+      console.log(config, '===========打印的 ------ startTimer');
+      config.status = '运行中';
+      return setInterval(() => {
         const newDate = new Date();
         const hours = newDate.getHours().toString(); // 转成字符串才能进行对比
         const minutes = newDate.getMinutes().toString();
-        console.log(this.tableData, '===========打印的 ------ this.tableData');
-        for (let i = 0; i < this.tableData.length; i++) {
-          const cur = this.tableData[i];
-          const curHours = cur.hours;
-          const curMinutes = cur.Minutes;
-          console.log(curHours, curMinutes, '===========打印的 ------ 时间');
-          if (hours === curHours && minutes === curMinutes && !this.playing && !cur.todayStop) {
-            audio.play();
-            this.playing = true;
-            this.$messageBox
-              .confirm('时间到了，需要停止吗?', '温馨提示', {
-                type: 'info',
-                center: true,
-                cancelButtonText: '取消',
-              })
-              .then(() => {
-                cur.todayStop = true;
-                this.playing = false;
-                audio.pause();
-              });
-            // clearInterval(setTime); //不能关，因为明天还会响，不能只响一次
-          } else {
-            console.log('还没到:' + hours + ':' + minutes);
-          }
+        const curHours = config.hours;
+        const curMinutes = config.Minutes;
+        console.log(curHours, curMinutes, '===========打印的 ------ 时间');
+        if (hours === curHours && minutes === curMinutes && !this.playing && !config.todayStop) {
+          audio.play();
+          this.playing = true;
+          this.$messageBox
+            .confirm('时间到了，需要停止吗?', '温馨提示', {
+              type: 'info',
+              center: true,
+              cancelButtonText: '取消',
+            })
+            .then(() => {
+              config.todayStop = true;
+              this.playing = false;
+              audio.pause();
+            });
+          // clearInterval(setTime); //不能关，因为明天还会响，不能只响一次
+        } else {
+          console.log('定时器' + index + '还没到:' + hours + ':' + minutes);
         }
       }, 5 * 1000);
+    },
+    //计时器
+    timer() {
+      this.tableData.forEach((config, index) => {
+        const audio = (this.audioInstance = new Audio());
+        audio.src = 'https://music.163.com/song/media/outer/url?id=167827.mp3';
+        const setTime = this.startTimer(config, index);
+        this.timers.push(setTime);
+      });
     },
     //改变？？
     setName() {
@@ -187,13 +196,33 @@ export default {
       this.setName();
     },
     //没有完成的
-    //停止计时，还没有做时间系统，还缺少个开关（用对错的那个）
-    stop() {
+    //停止计时，还缺少个开关（用对错的那个）
+    stop(row, index) {
+      const timer = this.timers[index]; // 获取当前行的定时器
+      if (timer) {
+        ElMessage.success('已停止');
+        // 如果定时器存在
+        this.tableData[index].status = '停止';
+        clearInterval(timer); // 清除
+        this.timers[index] = null; // 置为null
+      }
       //停止计时，还没写
       // clearInterval(setTime);
     },
     //启动
-    starts(row) {},
+    starts(row, index) {
+      ElMessage.success('已启动');
+      const timerConfig = this.tableData[index];
+      const timer = this.startTimer(timerConfig, index);
+      this.timers[index] = timer;
+    },
+    toggle(row, index) {
+      if (row.status === '停止') {
+        this.starts(row, index);
+      } else {
+        this.stop(row, index);
+      }
+    },
     //修改时间（赋值---旧=新），再加个输入框
     edit(row) {},
     //删除

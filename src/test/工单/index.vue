@@ -123,10 +123,10 @@ export default {
 </script>
 
 <style lang="less">
-#app > div {
+.header > div {
   text-align: left;
 }
-。header {
+.header {
   margin-top: 10px;
 }
 .finish {

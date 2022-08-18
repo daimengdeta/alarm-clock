@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.butterfly {
+    height: 1.875rem;
+    -webkit-perspective: 31.25rem;
+    perspective: 31.25rem;
+    position: relative;
+    -webkit-transform: rotate3d(2,1,-1,90deg);
+    transform: rotate3d(2,1,-1,90deg);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    width: 1.875rem
+}
+
+.butterfly:after,.butterfly:before {
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    background: #699BFF;
+    border-radius: 50%;
+    content: "";
+    height: 1rem;
+    position: absolute;
+    top: calc(50% - .5rem);
+    width: 1rem
+}
+
+.butterfly:before {
+    -webkit-animation-name: flapL;
+    animation-name: flapL;
+    border-top-right-radius: 0;
+    left: 0;
+    opacity: .7;
+    -webkit-transform-origin: right top;
+    transform-origin: right top
+}
+
+.butterfly:after {
+    -webkit-animation-name: flapR;
+    animation-name: flapR;
+    border-top-left-radius: 0;
+    left: 50%;
+    opacity: .5;
+    -webkit-transform-origin: left top;
+    transform-origin: left top
+}
+
+@-webkit-keyframes flapL {
+    25%,50% {
+        -webkit-transform: rotateY(-45deg);
+        transform: rotateY(-45deg)
+    }
+
+    12.5%,37.5%,65% {
+        -webkit-transform: rotateY(45deg);
+        transform: rotateY(45deg)
+    }
+
+    0%,to {
+        -webkit-transform: rotateY(-30deg);
+        transform: rotateY(-30deg)
+    }
+}
+
+@keyframes flapL {
+    25%,50% {
+        -webkit-transform: rotateY(-45deg);
+        transform: rotateY(-45deg)
+    }
+
+    12.5%,37.5%,65% {
+        -webkit-transform: rotateY(45deg);
+        transform: rotateY(45deg)
+    }
+
+    0%,to {
+        -webkit-transform: rotateY(-30deg);
+        transform: rotateY(-30deg)
+    }
+}
+
+@-webkit-keyframes flapR {
+    25%,50% {
+        -webkit-transform: rotateY(45deg);
+        transform: rotateY(45deg)
+    }
+
+    12.5%,37.5%,65% {
+        -webkit-transform: rotateY(-45deg);
+        transform: rotateY(-45deg)
+    }
+
+    0%,to {
+        -webkit-transform: rotateY(30deg);
+        transform: rotateY(30deg)
+    }
+}
+
+@keyframes flapR {
+    25%,50% {
+        -webkit-transform: rotateY(45deg);
+        transform: rotateY(45deg)
+    }
+
+    12.5%,37.5%,65% {
+        -webkit-transform: rotateY(-45deg);
+        transform: rotateY(-45deg)
+    }
+
+    0%,to {
+        -webkit-transform: rotateY(30deg);
+        transform: rotateY(30deg)
+    }
+}

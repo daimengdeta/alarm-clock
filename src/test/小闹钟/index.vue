@@ -14,7 +14,7 @@
     </form>
   </div>
   <div class="">
-    1 <audio src="http://music.163.com/song/media/outer/url?id=167827.mp3" controls="controls">11</audio>1
+    1 <audio src="http://file.ws.126.net/f2e/news/dada_valentines2018/files/bgm2.mp3" controls="controls">11</audio>1
 
     <!--    <button @click="add">+</button>-->
     <!--    <div class="">{{ add() }}{{ xlz }}</div>-->
@@ -128,7 +128,7 @@ export default {
 
     onsubmit() {
       const audio = new Audio();
-      audio.src = 'http://music.163.com/song/media/outer/url?id=167827.mp3';
+      audio.src = 'http://file.ws.126.net/f2e/news/dada_valentines2018/files/bgm2.mp3';
       console.log(this.form, '===========打印的 ------ this.form');
       if (!this.form.year && !this.form.month && !this.form.date && !this.form.hours) {
         alert('请填写时间');

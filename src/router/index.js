@@ -10,7 +10,9 @@ import 工单 from '../test/工单/index.vue';
 import 增删改查 from '../test/真实开发-增删改查/index.vue';
 import 增删改查练习 from '../test/增删改查练习/index.vue';
 import Axios from '../test/Axios/index.vue';
-import elplus转换成vue from '../test/el,plus转换成vue/index.vue';
+// import elplus转换成vue from '../test/el,plus转换成vue/index.vue';
+import 小闹钟 from '../test/小闹钟/index.vue';
+import 小闹钟2 from '../test/小闹钟2/index.vue';
 
 // import JS练习 from '../test/JS练习/index.vue';
 // 2.创建Router对象
@@ -68,10 +70,20 @@ const routes = createRouter({
       path: '/Axios',
       component: Axios,
     },
+    // {
+    //   name: 'el,plus转换成vue',
+    //   path: '/' + encodeURIComponent('el,plus转换成vue'),
+    //   component: elplus转换成vue,
+    // },
     {
-      name: 'el,plus转换成vue',
-      path: '/' + encodeURIComponent('el,plus转换成vue'),
-      component: elplus转换成vue,
+      name: '小闹钟',
+      path: '/' + encodeURIComponent('小闹钟'),
+      component: 小闹钟,
+    },
+    {
+      name: '小闹钟2',
+      path: '/' + encodeURIComponent('小闹钟2'),
+      component: 小闹钟2,
     },
     // {
     //   name: 'JS练习',

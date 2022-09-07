@@ -14,7 +14,8 @@ import Axios from '../test/Axios/index.vue';
 import 小闹钟 from '../test/小闹钟/index.vue';
 import 小闹钟2 from '../test/小闹钟2/index.vue';
 import 待办事项 from '../test/待办事项/index.vue';
-
+import 模板2 from '../test/模板2/index.vue';
+import 练习用 from '../test/练习用/index.vue';
 // import JS练习 from '../test/JS练习/index.vue';
 // 2.创建Router对象
 
@@ -91,7 +92,16 @@ const routes = createRouter({
       path: '/' + encodeURIComponent('待办事项'),
       component: 待办事项,
     },
-
+    {
+      name: '模板2',
+      path: '/' + encodeURIComponent('模板2'),
+      component: 模板2,
+    },
+    {
+      name: '练习用',
+      path: '/' + encodeURIComponent('练习用'),
+      component: 练习用,
+    },
     // {
     //   name: 'JS练习',
     //   path: '/JS练习',

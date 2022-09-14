@@ -11,7 +11,7 @@ console.log(gendersOptions, '===========打印的 ------ ');
 
 const genders = gendersOptions.map((item) => item.label);
 
-console.log(genders, '===========打印的 ------ ');
+console.log(genders, '===========打印的 ------111 ');
 
 const genders1 = gendersOptions.map((value) => [1]);
 

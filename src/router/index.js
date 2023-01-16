@@ -8,8 +8,9 @@ import 父传子结合双向绑定 from '../test/父传子结合双向绑定/ind
 import 父访问子 from '../test/父访问子/index.vue';
 import 工单 from '../test/工单/index.vue';
 import 增删改查 from '../test/真实开发-增删改查/index.vue';
-import 增删改查练习 from '../test/增删改查练习/index.vue';
+import 学生系统 from '../test/学生系统/index.vue';
 import Axios from '../test/Axios/index.vue';
+import 年收入支出明细 from '../test/年收入支出明细/index.vue';
 // import elplus转换成vue from '../test/el,plus转换成vue/index.vue';
 import 小闹钟 from '../test/小闹钟/index.vue';
 import 小闹钟2 from '../test/小闹钟2/index.vue';
@@ -33,9 +34,9 @@ const routes = createRouter({
       component: 列表练习,
     },
     {
-      name: '增删改查练习',
-      path: '/' + encodeURIComponent('增删改查练习'),
-      component: 增删改查练习,
+      name: '学生系统',
+      path: '/' + encodeURIComponent('学生系统'),
+      component: 学生系统,
     },
     {
       name: '子传父练习',
@@ -102,10 +103,16 @@ const routes = createRouter({
       path: '/' + encodeURIComponent('练习用'),
       component: 练习用,
     },
+    {
+      name: '年收入支出明细',
+      path: '/' + encodeURIComponent('年收入支出明细'),
+      component: 年收入支出明细,
+    },
     // {
     //   name: 'JS练习',
     //   path: '/JS练习',
     //   component: JS练习,
+    // 年收入支出明细
     // },
   ],
   history: createWebHashHistory(),

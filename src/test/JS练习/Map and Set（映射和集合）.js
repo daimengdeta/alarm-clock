@@ -64,41 +64,70 @@ for (let value of set1) {
 }
 set1.forEach((item) => console.log(item, '===========打印的 ------ 5.2'));
 
-//过滤数组中的唯一元素
-let values = ['Hare', 'Krishna', 'Hare', 'Krishna', 'Krishna', 'Krishna', 'Hare', 'Hare', ':-O'];
+// //过滤数组中的唯一元素
+// let values = ['Hare', 'Krishna', 'Hare', 'Krishna', 'Krishna', 'Krishna', 'Hare', 'Hare', ':-O'];
+// function unique(arr) {
+//   let set2 = new Set();
+//   // arr.forEach((item) => set2.add(item));
+//   for (let value of arr) {
+//     set2.add(value);
+//   }
+//   return set2;
+// }
+//
+// console.log(unique(values), '===========打印的 ------ 6');
+//
+// //任务2  过滤字谜（anagrams）
+// function aclean(arr) {
+//   let map = new Map();
+//   for (let work of arr) {
+//     let sorted = work.toLowerCase().split('').sort().join();
+//     map.set(sorted, work);
+//   }
+//   return Array.from(map.values());
+// }
+//
+// let arr = ['nap', 'teachers', 'cheaters', 'PAN', 'ear', 'era', 'hectares'];
+//
+// console.log(aclean(arr)); // "nap,teachers,ear" or "PAN,cheaters,era"
+// console.log(aclean(arr)); // "nap,teachers,ear" or "PAN,cheaters,era"
+//
+// //
+// let map4 = new Map();
+//
+// map4.set('name', 'John');
+//
+// let keys = Array.from(map4.keys());
+//
+// // Error: keys.push is not a function
+// keys.push('more');
+// console.log(keys, '===========打印的 ------ ');
+
+//任务
 function unique(arr) {
-  let set2 = new Set();
-  // arr.forEach((item) => set2.add(item));
-  for (let value of arr) {
-    set2.add(value);
-  }
-  return set2;
+  // return new Set(values);---此处为对象，
+  //利用Array.from转换成数组
+  return Array.from(new Set(values));
 }
 
-console.log(unique(values), '===========打印的 ------ 6');
+let values = ['Hare', 'Krishna', 'Hare', 'Krishna', 'Krishna', 'Krishna', 'Hare', 'Hare', ':-O'];
 
-//任务2  过滤字谜（anagrams）
+console.log(unique(values), '1');
+
+//任务2
+//先分成各个单词，再分字母，变成小写
+let arr = ['nap', 'teachers', 'cheaters', 'PAN', 'ear', 'era', 'hectares'];
 function aclean(arr) {
   let map = new Map();
-  for (let work of arr) {
-    let sorted = work.toLowerCase().split('').sort().join();
-    map.set(sorted, work);
+  for (let word of arr) {
+    // console.log(word, '===========打印的 ------ aclean-word');
+    let sorted = word.toLowerCase().split('').sort().join('');
+    map.set(sorted, word);
+    console.log(sorted, '===========打印的 ------ aclean-sorted');
   }
   return Array.from(map.values());
 }
 
-let arr = ['nap', 'teachers', 'cheaters', 'PAN', 'ear', 'era', 'hectares'];
+console.log(aclean(arr), '===========打印的 ------ 1.2');
 
-console.log(aclean(arr)); // "nap,teachers,ear" or "PAN,cheaters,era"
-console.log(aclean(arr)); // "nap,teachers,ear" or "PAN,cheaters,era"
-
-//
-let map4 = new Map();
-
-map4.set('name', 'John');
-
-let keys = Array.from(map4.keys());
-
-// Error: keys.push is not a function
-keys.push('more');
-console.log(keys, '===========打印的 ------ ');
+// alert( aclean(arr) ); // "nap,teachers,ear" or "PAN,cheaters,era"

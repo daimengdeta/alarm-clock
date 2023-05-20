@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>好瓜.中国</title>
+  </head>
+  <meta name="referrer" content="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+  <style>
+    /** {*/
+    /*  margin: 0px;*/
+    /*  padding: 0px;*/
+    /*}*/
+    body {
+      -webkit-font-feature-settings: 'tnum';
+      font-feature-settings: 'tnum';
+      background-color: #fff;
+      color: #1f2329;
+      font-family: PingFang SC, -apple-system, BlinkMacSystemFont, Microsoft YaHei, Hiragino Sans GB, Helvetica Neue,
+        Segoe UI, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-variant: tabular-nums;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .p-4 {
+      padding: 1rem 2rem;
+    }
+    .content {
+      line-height: 1.5;
+    }
+    .content > div {
+      padding-top: 20px;
+    }
+  </style>
+  <body>
+    <div class="p-4 content">
+      <h1>最新瓜</h1>
+      <div>最新瓜内部bug自取方法：</div>
+      <div>刷2分钟解锁👉快手极速版扫码解锁🔓</div>
+      <div>1、截图保存下面二维码 🍉</div>
+      <div>2、QQ扫码或手机商店下载【快手极速版】 🍉</div>
+      <div>3、打开【快手极速版】扫码解锁🔓 🍉</div>
+      <div class="" style="text-align: center">
+        <img
+          src="https://archive.biliimg.com/bfs/archive/24e3c60219d0db1c0c9ccd05e665071211cbd350.jpg@.webp"
+          style="width: 100%; height: 100%"
+        />
+        <img
+          src="https://archive.biliimg.com/bfs/archive/4fa777d2ba5bedddf7c1884851f5ead1c537215e.png@.webp"
+          style="width: 100%; height: 100%"
+        />
+        <img
+          src="https://archive.biliimg.com/bfs/archive/87ff26ec386582e3a8e706de74cdc2ee0ba1a7fb.jpg@.webp"
+          style="width: 100%; height: 100%"
+        />
+        <img
+          src="https://archive.biliimg.com/bfs/archive/c875c1c72dbe7db63fc0613bbcf9356af8b6cb3d.png@.webp"
+          style="width: 100%; height: 100%"
+        />
+      </div>
+      <div>注意！扫完二维码，一定要刷2分钟视频秒解锁各大网红博主 视频2000部瓜🍉</div>
+      <div>
+        网盘实时最新最新热🍉：河北铺KTV、河北神剪 金属、停车场、秃崽1V4 户外婷儿、安溪沙茶面、花店老 板娘、 程女士1V3
+        四大美合集 张继科景甜 等等500 部，实时更新。
+      </div>
+    </div>
+    <script charset="UTF-8" id="LA_COLLECT1" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script charset="UTF-8" id="LA_COLLECT2" src="./js-sdk-pro.js"></script>
+    <script>
+      LA.init({ id: 'K39WW8LXHBqJRZm6', ck: 'K39WW8LXHBqJRZm6' });
+    </script>
+    <script>
+      // 获取所有img标签元素
+      const imgElements = document.getElementsByTagName('img');
+
+      // 为每个img标签元素添加点击事件监听器
+      for (let i = 0; i < imgElements.length; i++) {
+        imgElements[i].addEventListener('click', function () {
+          // 创建一个a标签元素，并设置其href属性为当前点击的img标签的src属性值
+          const link = document.createElement('a');
+          link.href = this.src;
+
+          // 设置a标签元素的download属性为图片文件名，以便在下载时保留原始文件名
+          const filename = this.src.substring(this.src.lastIndexOf('/') + 1);
+          link.download = filename;
+
+          // 将a标签元素添加到body中，并执行点击事件，启动下载
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -207,7 +207,6 @@ export default {
               age: this.form.age,
               remarks: this.form.remarks,
             });
-
             console.log(this.tableData, '===========打印的 ------ 新增table');
             localStorage.setItem('个人信息', JSON.stringify(this.tableData));
             this.dialogFormVisible = false;
@@ -240,7 +239,7 @@ export default {
             ...row,
             gradeDesc: grade?.label,
             stateDesc: state?.label,
-            sadsada: 1231,
+            // sadsada: 1231,
           };
         });
         console.log(this.tableData, '===========打印的 ------ this.tableData');
@@ -251,7 +250,7 @@ export default {
     edit(row) {
       this.dialogFormVisible = true;
       this.form = row;
-      this.type = 'adit';
+      this.type = 'edit';
     },
     remove(index) {
       console.log(index, '===========打印的 ------ remove');

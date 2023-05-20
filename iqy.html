@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>爱奇艺VIP会员</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.7.0/vue.min.js"></script>
+    <link rel="icon" href="./iqy-logo.png" />
+    <style>
+      @font-face {
+        font-family: 'iconography';
+        src: url('//static.iqiyi.com/ext/common/iconography-v3-20181123/iconfont.eot');
+        src: url('//static.iqiyi.com/ext/common/iconography-v3-20181123/iconfont.ttf') format('truetype'),
+          url('//static.iqiyi.com/ext/common/iconography-v3-20181123/iconfont.svg#iconfont') format('svg');
+      }
+
+      @font-face {
+        font-family: 'IQYHT-Bold';
+        src: url('//static-s.iqiyi.com/iconFont-221031/IQYHT-Bold.eot');
+        src: url('//static-s.iqiyi.com/iconFont-221031/IQYHT-Bold.woff');
+        src: url('//static-s.iqiyi.com/iconFont-221031/IQYHT-Bold.ttf') format('truetype');
+      }
+      body {
+        background-color: #fff;
+        font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
+        font-size: 14px;
+        color: #333;
+      }
+      .primary-color {
+        color: #7b4800;
+      }
+      .px-4 {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .title {
+        display: flex;
+        justify-content: center;
+        font-size: 15px;
+        padding-top: 10px;
+        font-weight: bold;
+        color: #d6964d;
+      }
+      .squareMoney {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .vip-item {
+        position: relative;
+        z-index: 1;
+        height: 117px;
+        text-align: center;
+        border-radius: 6px;
+        background: #f7f7f7;
+      }
+      .square {
+        flex: 1;
+        height: 100px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+        border-radius: 10%;
+      }
+      .square:last-child {
+        margin-right: 0;
+      }
+      .vip-item-text {
+        font-size: 17px;
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: bold;
+        line-height: 20px;
+        padding-top: 17px;
+        padding-bottom: 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .square.selected {
+        background-image: linear-gradient(180deg, #fff0db, #fff0db);
+      }
+      .money {
+        font-size: 25px;
+        height: 25px;
+        line-height: 27px;
+        font-family: 'IQYHT-Bold';
+      }
+
+      .moneyText {
+        font-size: 13px;
+        margin-right: 1px;
+        font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
+      }
+      .phone {
+        margin-top: 20px;
+      }
+      .phoneNum {
+        -webkit-appearance: none;
+        background-color: #fff;
+        background-image: none;
+        border-radius: 4px;
+        border: 1px solid #dcdfe6;
+        box-sizing: border-box;
+        color: #333;
+        font-weight: bold;
+        display: inline-block;
+        font-size: 16px;
+        height: 40px;
+        line-height: 40px;
+        outline: none;
+        padding: 0 15px;
+        transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+        width: 100%;
+      }
+      .phoneNum:focus {
+        outline: none;
+        border-color: #409eff;
+      }
+      .phoneText {
+        color: #333;
+        font-size: 18px;
+        text-align: left;
+        margin-bottom: 10px;
+      }
+      .phoneSubmit {
+        position: relative;
+        display: -moz-box;
+        display: -webkit-box;
+        -moz-box-align: center;
+        -webkit-box-align: center;
+        -moz-box-pack: center;
+        -webkit-box-pack: center;
+        color: #7b4800;
+        text-align: center;
+        width: 100%;
+        margin: auto;
+        margin-top: 20px;
+        height: 45px;
+        border-radius: 6px;
+        font-size: 18px;
+        border: 1px solid #ccc;
+        background-repeat: repeat-x;
+        background-image: -webkit-linear-gradient(45deg, #ffdd81, #ffb65b);
+        background-image: -o-linear-gradient(45deg, #ffdd81, #ffb65b);
+        background-image: linear-gradient(45deg, #ffdd81, #ffb65b);
+      }
+      .ruleSty {
+        display: flex;
+        margin-top: 10px;
+      }
+      .rule {
+        margin-top: 10px;
+        color: #333;
+      }
+      .rule-title {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      .ruleText {
+        font-size: 13px;
+      }
+      .ruleDrop {
+        flex: 0 0 auto;
+        width: 6px;
+        height: 6px;
+        background: #ffb65b;
+        border-radius: 50%;
+        color: #ffb65b;
+        font-size: 20px;
+        font-weight: bold;
+        margin-right: 5px;
+        margin-top: 5px;
+      }
+      .w-full {
+        width: 100%;
+      }
+      .m-box {
+        margin-top: 6px;
+        margin-bottom: 6px;
+        background-color: #fff;
+        padding-bottom: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="px-4 primary-color">
+        <div class="title">{{ title }}</div>
+
+        <!--    <image src="/static/钱钱-01.png"></image>-->
+        <div class="squareMoney">
+          <div
+            v-for="(item, index) in squares"
+            :key="index"
+            class="vip-item square"
+            :class="id === index ? 'selected' : ''"
+            @click="clickSquare(index)"
+          >
+            <div class="squareCenter">
+              <div class="vip-item-text">{{ item.text }}</div>
+              <div class="money"><span class="moneyText">￥</span>{{ item.num }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="phone">
+          <div class="phoneText">输入对方会员手机号</div>
+          <div class=""></div>
+          <input class="phoneNum" placeholder="输入对方会员手机号" />
+          <button @click="submit" class="phoneSubmit">立即开通</button>
+          <div class="rule">
+            <div class="rule-title">规则说明：</div>
+            <div class="ruleSty">
+              <div class="ruleDrop"></div>
+
+              <div class="ruleText">{{ ruleTextOne }}</div>
+            </div>
+            <div class="ruleSty">
+              <div class="ruleDrop"></div>
+              <div class="ruleText">{{ ruleTextTwo }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="m-box">
+          <div class="m-box-items m-box-items-full">
+            <section class="m-pay-privilegeicon">
+              <div class="title">
+                <h3 class="c-title">更多推荐</h3>
+              </div>
+              <div class="privilege-info">
+                <img
+                  src="//static-s.iqiyi.com/common/20230209/qiyue2.0/f8/33/921f3d8a09e74df6bf9e3acb202349308745195009167694721.png"
+                  alt=""
+                  class="privilege-pic w-full"
+                />
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            title: '电视/手机/VR等众多权益',
+            squares: [
+              {
+                id: 1,
+                text: '星钻月卡',
+                num: 60,
+              },
+              {
+                id: 2,
+                text: '星钻季卡',
+                num: 138,
+              },
+              {
+                id: 3,
+                text: '星钻年卡',
+                num: 448,
+              },
+            ],
+            id: 2,
+            ruleTextOne: '如果好友手机号未注册爱奇艺，会员权益将在注册后激活',
+            ruleTextTwo: '会员激活有效期为7天，逾期未激活将自动退款至您的支付账户',
+          };
+        },
+        methods: {
+          clickSquare(item, index) {
+            this.id = item;
+          },
+          submit() {},
+        },
+      });
+    </script>
+  </body>
+</html>

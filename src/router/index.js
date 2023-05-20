@@ -17,6 +17,9 @@ import 小闹钟2 from '../test/小闹钟2/index.vue';
 import 待办事项 from '../test/待办事项/index.vue';
 import 模板2 from '../test/模板2/index.vue';
 import 练习用 from '../test/练习用/index.vue';
+import 获取天气 from '../test/获取天气/index.vue';
+import VIP会员 from '../test/VIP会员/index.vue';
+
 // import JS练习 from '../test/JS练习/index.vue';
 // 2.创建Router对象
 
@@ -107,6 +110,16 @@ const routes = createRouter({
       name: '年收入支出明细',
       path: '/' + encodeURIComponent('年收入支出明细'),
       component: 年收入支出明细,
+    },
+    {
+      name: '获取天气',
+      path: '/' + encodeURIComponent('获取天气'),
+      component: 获取天气,
+    },
+    {
+      name: 'VIP会员',
+      path: '/' + encodeURIComponent('VIP会员'),
+      component: VIP会员,
     },
     // {
     //   name: 'JS练习',

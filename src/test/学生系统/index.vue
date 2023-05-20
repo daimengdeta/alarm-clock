@@ -105,13 +105,13 @@
 </template>
 
 <script>
-import Child from './components/child.vue';
+// import Child from './components/child.vue';
 import { nanoid } from 'nanoid';
 
 // import axios from 'axios';
 export default {
   components: {
-    Child,
+    // Child,
   },
   data() {
     return {

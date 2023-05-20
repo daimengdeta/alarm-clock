@@ -22,4 +22,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3 # GitHub Action打包后推送到gh-pages分支
         with:
           personal_token: ${{ secrets.ACCESS_TOKEN }} # 环境变量ACCESS_TOKEN用于访问GitHub API，需事先设置
-          publish_dir: ./dist # 打包后的文件所在目录，这里假设是dist
+          publish_dir: ./dist # 打包后的文件所在目录，这里假设是dist\
+          cname: ./public/CNAME # 指定CNAME文件所在路径
